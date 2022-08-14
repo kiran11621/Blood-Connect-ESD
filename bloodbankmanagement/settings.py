@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
+from pathlib import path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +29,7 @@ SECRET_KEY = '+zy!9k=9pql5gz9bkqjore)k6r!%w0atk(@(!(!zvp5e(t2i8n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['blood-connect-esd.herokuapp.com']
 
 
 # Application definition
@@ -81,8 +83,12 @@ WSGI_APPLICATION = 'bloodbankmanagement.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE' : 'django.db.backends.postresql_psycopg2' ,
+        'NAME': 'd63q0uveg2kggd',
+        'USER' : 'sfykqmktzpywvu' ,
+        'PASSWORD' : '3c05b9d8e29c2d472fd02bd87094e62be0bb12af8ef740c84042feb9a5a52cf2' ,
+        'HOST': 'ec2-44-195-100-240.compute-1.amazonaws.com',
+        'PORT' : '5432',
     }
 }
 
@@ -123,7 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+django_heroku.settings(locals())
+
 STATICFILES_DIRS=[
 STATIC_DIR,
  ]
